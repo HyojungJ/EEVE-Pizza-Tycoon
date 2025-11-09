@@ -59,7 +59,7 @@
 
 ![1](https://github.com/user-attachments/assets/31db47a0-eacb-4f9d-a58c-d6849793fc4f)
 
-![3](https://github.com/user-attachments/assets/b604e777-3ddd-46bc-a10d-2a87f8fc0c58)
+![2](https://github.com/user-attachments/assets/b22ea90c-bacb-45e8-9d60-a85b42051911)
 
 ![3](https://github.com/user-attachments/assets/fee86e43-27f3-4a8e-a29f-0f29ee4c4e89)
 
