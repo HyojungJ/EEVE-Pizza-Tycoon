@@ -26,8 +26,8 @@ order_prompt = """
 ㅍㅁ ㅍㅈ ㅎㄴㅇ
 사용된 토핑: 도우, 소스, 치즈, 피망
 
-페퍼로니랑 소시지랑 사귀는 거 맞죠?
-사용된 토핑: 도우, 소스, 치즈, 페퍼로니, 소시지
+페퍼로니랑 소세지랑 사귀는 거 맞죠?
+사용된 토핑: 도우, 소스, 치즈, 페퍼로니, 소세지
 
 아침의 태양처럼 밝고 아름다운 피자
 사용된 토핑: 도우, 소스, 치즈
@@ -79,7 +79,7 @@ st.set_page_config(page_title="피자 타이쿤 게임", page_icon="🍕", layou
 
 # 세션 상태 초기화
 if "screen" not in st.session_state:
-    st.session_state.screen = "home"  # home, intro, tutorial, game
+    st.session_state.screen = "home" 
 
 if "customer_image" not in st.session_state:
     st.session_state.customer_image = None
@@ -91,7 +91,7 @@ if "current_toppings" not in st.session_state:
     st.session_state.current_toppings = None
 
 if "total_money" not in st.session_state:
-    st.session_state.total_money = 10000
+    st.session_state.total_money = 0
 
 if "result_message" not in st.session_state:
     st.session_state.result_message = None
@@ -182,11 +182,9 @@ elif st.session_state.screen == "game":
             response = customer_order(order_prompt)
             toppings, order = toppings_check(response)
             
-            # 딕셔너리 부분 제거 (혹시 남아있을 경우)
             if '{' in order:
                 order = order.split('{')[0].strip()
             
-            # 기본 토핑이 없으면 추가 (AI가 누락할 수 있음)
             base_toppings = ['도우', '소스', '치즈']
             for base in base_toppings:
                 if base not in toppings:
@@ -244,12 +242,12 @@ elif st.session_state.screen == "game":
                 # 정답 토핑과 비교
                 correct_toppings = st.session_state.current_toppings
                 
-                # 정렬해서 비교 (순서 상관없이)
+                # 정렬해서 비교 
                 if sorted(user_toppings) == sorted(correct_toppings):
-                    # 정답! 수익 계산
+                    # 정답
                     profit = calculate_profit(user_toppings)
                     st.session_state.total_money += profit
-                    
+
                     # AI 손님의 긍정적 리뷰 생성
                     with st.spinner("손님이 피자를 평가하고 있습니다..."):
                         review = customer_review(review_prompt, is_correct=True)
@@ -259,10 +257,9 @@ elif st.session_state.screen == "game":
                         "message": f"손님: \"{review}\"\n\n 수익: +{profit:,}원\n 현재 보유 금액: {st.session_state.total_money:,}원"
                     }
                     
-                    # 제출 카운트 증가
                     st.session_state.submitted_count += 1
                 else:
-                    # 오답! 재료비 손실
+                    # 오답
                     loss = calculate_profit(user_toppings)
                     st.session_state.total_money -= abs(loss)
                     correct_answer = ', '.join(correct_toppings)
@@ -284,17 +281,14 @@ elif st.session_state.screen == "game":
                 st.error("재료를 입력해주세요!")
     
     with col_btn2:
-        # 5명 이하일 때는 다음 손님 버튼, 5명 완료 시 결과 보기 버튼
         if st.session_state.submitted_count < 5:
             if st.button("다음 손님", use_container_width=True):
-                # 손님 카운트 증가
                 st.session_state.customer_count += 1
                 
-                # 새로운 손님 이미지 순서대로 선택
                 customer_images = [
                     "./images/c1.jpg",
                     "./images/c2.jpg", 
-                    "./images/c3.png",  # c3는 png 파일
+                    "./images/c3.png",  
                     "./images/c4.jpg",
                     "./images/c5.jpg"
                 ]
@@ -306,11 +300,9 @@ elif st.session_state.screen == "game":
                     response = customer_order(order_prompt)
                     toppings, order = toppings_check(response)
                     
-                    # 딕셔너리 부분 제거 (혹시 남아있을 경우)
                     if '{' in order:
                         order = order.split('{')[0].strip()
                     
-                    # 기본 토핑이 없으면 추가 (AI가 누락할 수 있음)
                     base_toppings = ['도우', '소스', '치즈']
                     for base in base_toppings:
                         if base not in toppings:

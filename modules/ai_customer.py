@@ -12,34 +12,26 @@ def customer_order(prompt):
     return response['message']['content']  
 
 def toppings_check(response):
-    """
-    AI 응답에서 주문 텍스트와 토핑 리스트를 추출
-    """
-    # 1. 딕셔너리 형식 체크 (예: {"주문": ['토핑']})
+    # AI 응답에서 주문 텍스트와 토핑 리스트를 추출
     dict_match = re.search(r'\{[^}]+\}', response)
     if dict_match:
         dict_str = dict_match.group(0)
-        # 딕셔너리 앞의 텍스트를 주문으로 추출
         order = response[:dict_match.start()].strip()
-        # 콜론 제거 (예: "두 가지 토핑 피자 주문하기:" -> "두 가지 토핑 피자 주문하기")
         order = order.rstrip(':').strip()
-        
-        # 리스트 부분 추출
+    
         list_match = re.search(r'\[([^\]]+)\]', dict_str)
+
         if list_match:
             toppings_str = list_match.group(1)
-            # 따옴표 제거하고 토핑 리스트 생성
             toppings = [t.strip().strip("'\"") for t in toppings_str.split(',')]
             return toppings, order
     
-    # 2. "사용된 토핑:" 형식 체크
     toppings_match = re.search(r'사용된 토핑:\s*(.*)', response)
     if toppings_match:
         toppings = [t.strip() for t in toppings_match.group(1).split(',')]
         order = response.split('사용된 토핑:')[0].strip()
         return toppings, order
     
-    # 3. 기본값: 전체를 주문으로, 빈 토핑 리스트
     return [], response.strip()
 
 def customer_review(prompt, is_correct):
