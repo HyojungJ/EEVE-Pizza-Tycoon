@@ -42,7 +42,7 @@ def customer_review(prompt, is_correct):
         user_message = "주문과 다른 피자를 받았습니다. 부정적인 반응을 보여주세요."
     
     response = ollama.chat(
-        model='lancard/korean-yanolja-eeve',
+        model='EEVE-Korean-10.8B',
         messages=[
             {"role": "system", "content": f"{prompt} 응답은 100자 이내로 작성해 주세요."}, 
             {"role": "user", "content": user_message}
