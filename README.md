@@ -56,6 +56,17 @@
 
 
 ## 게임 구현
-=======
-# AI 기반 피자 타이쿤 게임: 좋은 피자, 위대한 피자
->>>>>>> 46fa76fadf8325da453e70cf2383c70bdd3f9e34
+
+![1](https://github.com/user-attachments/assets/31db47a0-eacb-4f9d-a58c-d6849793fc4f)
+
+![3](https://github.com/user-attachments/assets/b604e777-3ddd-46bc-a10d-2a87f8fc0c58)
+
+![3](https://github.com/user-attachments/assets/fee86e43-27f3-4a8e-a29f-0f29ee4c4e89)
+
+![4](https://github.com/user-attachments/assets/05034296-00eb-4837-b65c-7869d3146ab2)
+
+![5](https://github.com/user-attachments/assets/2fb79682-61ea-4869-b1ce-e8938b72295d)
+
+
+
+
